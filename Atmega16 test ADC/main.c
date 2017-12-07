@@ -65,6 +65,6 @@ int main (){
 			break;
 		}
 		_delay_ms(2);
-		counter = (uint32_t)adc_read(0)*100/1024;
+		counter = adc_read(0);
 	}
 }

@@ -17,7 +17,7 @@
 DEVICE     = atmega16
 CLOCK      = 8000000
 PROGRAMMER = -c usbasp -P /dev/ttys000
-OBJECTS    = main.o
+OBJECTS    = main.o debounce.o interfacesetting.o adc.o
 FUSES      = -U lfuse:w:0xa1:m -U hfuse:w:0xd1:m
 # ATMega8 fuse bits (fuse bits for other devices are different!):
 # Example for 8 MHz internal oscillator
@@ -60,7 +60,7 @@ FUSES      = -U lfuse:w:0xa1:m -U hfuse:w:0xd1:m
 # Tune the lines below only if you know what you are doing:
 
 AVRDUDE = avrdude $(PROGRAMMER) -p $(DEVICE)
-COMPILE = avr-gcc -Wall -Os -DF_CPU=$(CLOCK) -mmcu=$(DEVICE)
+COMPILE = avr-gcc -Wall -Os -DF_CPU=$(CLOCK) -mmcu=$(DEVICE) -std=c99
 
 # symbolic targets:
 all:	main.hex

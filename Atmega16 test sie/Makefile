@@ -13,7 +13,7 @@ ${BIN}.elf: ${OBJS}
 	${CC} -o $@ $^
 
 install: ${BIN}.hex
-	avrdude -F -V -c usbasp -p m16 -P ${PORT} -b 115200 -U lfuse:w:0xe4:m -U hfuse:w:0xd9:m -U flash:w:$< 
+	avrdude -F -V -c usbasp -p m16 -P ${PORT} -U lfuse:w:0xe4:m -U hfuse:w:0xd9:m -U flash:w:$< 
 
 clean:
 	rm -f ${BIN}.elf ${BIN}.hex ${OBJS}

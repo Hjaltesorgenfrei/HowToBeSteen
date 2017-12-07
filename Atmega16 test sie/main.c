@@ -4,18 +4,20 @@
  
 #include <avr/io.h>
 #include <avr/interrupt.h>
+static volatile uint16_t counter = 0;
+
 ISR (TIMER1_COMPA_vect)
 {
-		PORTC ^= 0xFF;
+	counter++;
 }
 
 int main(void)
 {
     // CTC mode, Clock/8
-    TCCR1B |= (1 << WGM12) | (1 << CS11);
+    TCCR1B |=  (1 << CS11);
     // Load the high byte, then the low byte
     // into the output compare
-    OCR1A = 0xFFFF;
+    OCR1A = 0xFFF;
  
     // Enable the compare match interrupt
     TIMSK |= (1 << OCF1A);
@@ -28,5 +30,11 @@ int main(void)
 	PORTC = 0xFF;
     while (1)
     {
+	if (counter > 5){
+		counter = 0;
+		if (PORTC == 0)
+			PORTC = 0xFF;
+		else PORTC = 0x00;
+	}	
     }
 }

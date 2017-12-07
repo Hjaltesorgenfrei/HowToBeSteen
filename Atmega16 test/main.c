@@ -28,7 +28,7 @@ int main (){
 	PORTD = 0b00000001;
 	int counter2 = 0;
 	while(1){
-			switch(PORTD){
+	switch(PORTD){
 		case 0b00001000:
 			PORTD = 0b00000001;
 			PORTC = 0b11111111;
